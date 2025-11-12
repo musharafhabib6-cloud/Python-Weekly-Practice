@@ -1,0 +1,23 @@
+import pandas as pd
+
+# Load your CSV file
+data = pd.read_csv('grades.csv')
+
+# Show the original data
+print("Original Data:\n", data)
+
+# Calculate average marks for each student
+data['Average'] = data[['Math', 'Science', 'English', 'History']].mean(axis=1)
+
+# Sort by average (highest first)
+sorted_data = data.sort_values(by='Average', ascending=False)
+
+# Filter students who scored above 85 on average
+top_students = sorted_data[sorted_data['Average'] > 85]
+
+# Save new file with averages
+sorted_data.to_csv('output.csv', index=False)
+
+# Display results
+print("\nTop Students (Average > 85):\n", top_students)
+print("\n✅ Results saved as output.csv")
